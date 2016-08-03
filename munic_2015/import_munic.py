@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'munic.settings'
 
@@ -83,6 +84,7 @@ def save_sheet_recursos_humanos(sheet_recursos_humanos):
 
 def execute_migration_recursos_humanos(file_name_with_path ="C:\desenv\dados\Base_MUNIC_2015_ods\Base_MUNIC_2015.ods", sheet_name="Recursos_humanos"):
     populate_pesquisa_if_need()
+    populate_TipoItemPesquisa_if_need()
     populate_AdministracaoQuadroPessoal_if_need()
     sheet_recursos_humanos = get_sheet(file_name_with_path, sheet_name)
     save_sheet_recursos_humanos(sheet_recursos_humanos)

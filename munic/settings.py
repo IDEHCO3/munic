@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'rest_framework_gis',
     'corsheaders',
     'munic_2015',
-
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,10 +82,11 @@ DATABASES = {
                'options': '-c search_path=pesquisa_munic',
 
        },
-       'HOST': '',
-       'NAME': '',
-       'USER': '',
-       'PASSWORD': '',
+       'HOST': 'localhost',
+       'PORT': '2345',
+       'NAME': 'idehco3',
+       'USER': 'idehco3',
+       'PASSWORD': 'idehco3',
    }
 }
 
