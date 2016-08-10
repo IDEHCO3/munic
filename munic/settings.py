@@ -47,7 +47,6 @@ INSTALLED_APPS = (
     'munic_2015',
 )
 
-CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
@@ -55,6 +54,19 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_EXPOSE_HEADERS = (
+    "Allow",
+    "Content-Type",
+    "Date",
+    "Link",
+    "Server",
+    "Vary",
+    "X-Frame-Options",
+)
+
 
 ROOT_URLCONF = 'munic.urls'
 
