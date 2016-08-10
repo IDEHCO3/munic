@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^munic/', include('munic_2015.urls', namespace="munic")),
+    url(r'^contexts/', include('context.urls', namespace='context')),
 ]

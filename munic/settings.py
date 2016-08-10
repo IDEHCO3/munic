@@ -38,11 +38,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'django.contrib.sites',
     'rest_framework',
     'rest_framework_gis',
     'corsheaders',
+    'context',
+    'hydra',
     'munic_2015',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE_CLASSES = (
     'corsheaders.middleware.CorsMiddleware',
