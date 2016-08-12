@@ -13,9 +13,9 @@ def loadEsferaMunicipalContext():
         contexts = []
         contexts.append(Context(attribute="id_esfera_municipal", means="@id", type="http://schema.org/Integer", classname=esferaMunicipalContextClass))
         contexts.append(Context(attribute="codigo_municipio", means="http://schema.org/Thing", type="http://schema.org/Text", classname=esferaMunicipalContextClass))
-        contexts.append(Context(attribute="url_nome_municipio", means="http://schema.org/url", type="http://schema.org/Text", classname=esferaMunicipalContextClass))
+        contexts.append(Context(attribute="url_nome_municipio", means="http://schema.org/name", type="@id", classname=esferaMunicipalContextClass))
         contexts.append(Context(attribute="geocodigo", means="http://schema.org/Thing", type="http://schema.org/Text", classname=esferaMunicipalContextClass))
-        contexts.append(Context(attribute="url_geometry", means="http://schema.org/url", type="http://schema.org/Text", classname=esferaMunicipalContextClass))
+        contexts.append(Context(attribute="url_geometry", means="http://geojson.org/vocab#geometry", type="@id", classname=esferaMunicipalContextClass))
         for obj in contexts:
             obj.save()
 
