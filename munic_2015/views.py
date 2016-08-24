@@ -7,5 +7,7 @@ from context.views import *
 
 class EsferaMunicipalList(CreatorContext):
 
-    queryset = EsferaMunicipal.objects.all()
+    #queryset = EsferaMunicipal.objects.filter(id_esfera_municipal__lte=5600)
+    queryset = EsferaMunicipal.objects.filter(id_esfera_municipal__lte=6000)
+    #queryset = EsferaMunicipal.objects.all()
     serializer_class = EsferaMunicipalSerializer
