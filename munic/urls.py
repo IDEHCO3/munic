@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from hydra.urls import getHydraVocabURLPatterns
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^munic/', include('munic_2015.urls', namespace="munic")),
     url(r'^contexts/', include('context.urls', namespace='context')),
-    url(r'^hydra/', include('hydra.urls', namespace='hydra')),
+    getHydraVocabURLPatterns(r'^hydra/'),
 ]
