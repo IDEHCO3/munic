@@ -27,7 +27,8 @@ def getHydraVocab():
             "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
             "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
             "label": "rdfs:label",
-            #"description": "rdfs:comment",
+            "Class": "hydra:Class",
+            "description": "rdfs:comment",
             "domain": {
                 "@id": "rdfs:domain",
                 "@type": "@id"
@@ -43,8 +44,42 @@ def getHydraVocab():
         }
     return context
 
+DEFAULT_HYDRA_PREFIX = "hydra"
+
+class HydraReservedWords():
+
+    def __init__(self, prefix=DEFAULT_HYDRA_PREFIX, connector=":"):
+        self.HYDRA_PREFIX = prefix
+        self.CONNECTOR = connector
+
+        self.ApiDocumentation = self.HYDRA_PREFIX + self.CONNECTOR + "ApiDocumentation"
+        self.supportedClass = self.HYDRA_PREFIX + self.CONNECTOR + "supportedClass"
+
+        self.property = self.HYDRA_PREFIX + self.CONNECTOR + "property"
+        self.required = self.HYDRA_PREFIX + self.CONNECTOR + "required"
+        self.readable = self.HYDRA_PREFIX + self.CONNECTOR + "readable"
+        self.writeable = self.HYDRA_PREFIX + self.CONNECTOR + "writeable"
+
+        self.title = self.HYDRA_PREFIX + self.CONNECTOR + "title"
+        self.method = self.HYDRA_PREFIX + self.CONNECTOR + "method"
+        self.expects = self.HYDRA_PREFIX + self.CONNECTOR + "expects"
+        self.returns = self.HYDRA_PREFIX + self.CONNECTOR + "returns"
+        self.possibleStatus = self.HYDRA_PREFIX + self.CONNECTOR + "possibleStatus"
+
+        self.createResourceOperation = self.HYDRA_PREFIX + self.CONNECTOR + "CreateResourceOperation"
+        self.replaceResourceOperation = self.HYDRA_PREFIX + self.CONNECTOR + "ReplaceResourceOperation"
+        self.deleteResourceOperation = self.HYDRA_PREFIX + self.CONNECTOR + "DeleteResourceOperation"
+
+        self.Class = self.HYDRA_PREFIX + self.CONNECTOR + "Class"
+        self.description = self.HYDRA_PREFIX + self.CONNECTOR + "description"
+
+        self.suportedProperty = self.HYDRA_PREFIX + self.CONNECTOR + "suportedProperty"
+        self.suportedOperation = self.HYDRA_PREFIX + self.CONNECTOR + "suportedOperation"
+
+
 class HydraPropertySerializer:
 
+    h = HydraReservedWords()
 
     def __init__(self):
         self._data = []
@@ -79,10 +114,10 @@ class HydraPropertySerializer:
     def addProperty(self, name="", type="", required=False, readable=False, writeable=False):
         property = {
             #"@type": type,
-            "property": name,
-            "required": required,
-            "readable": readable,
-            "writeable": writeable,
+            self.h.property: name,
+            self.h.required: required,
+            self.h.readable: readable,
+            self.h.writeable: writeable,
         }
         self._data.append(property)
 
@@ -93,6 +128,8 @@ class HydraPropertySerializer:
 
 
 class HydraMethodSerializer:
+
+    h = HydraReservedWords()
 
     def __init__(self):
         self._data = []
@@ -115,36 +152,36 @@ class HydraMethodSerializer:
     def addDefaultCreateOperation(self, id="", expects="", returns="", possible_status=[]):
         method = {
             #"@id": id,
-            "@type": "CreateResourceOperation",
-            "title": "Create",
-            "method": "POST",
-            "expects": expects,
-            "returns": returns,
-            "possibleStatus": possible_status
+            "@type": self.h.createResourceOperation,
+            self.h.title: "Create",
+            self.h.method: "POST",
+            self.h.expects: expects,
+            self.h.returns: returns,
+            self.h.possibleStatus: possible_status
         }
         self._data.append(method)
 
     def addDefaultUpdateOperation(self, id="", expects="", returns="", possible_status=[]):
         method = {
             #"@id": id,
-            "@type": "ReplaceResourceOperation",
-            "title": "Update",
-            "method": "PUT",
-            "expects": expects,
-            "returns": returns,
-            "possibleStatus": possible_status
+            "@type": self.h.replaceResourceOperation,
+            self.h.title: "Update",
+            self.h.method: "PUT",
+            self.h.expects: expects,
+            self.h.returns: returns,
+            self.h.possibleStatus: possible_status
         }
         self._data.append(method)
 
     def addDefaultDeleteOperation(self, id="", possible_status=[]):
         method = {
             #"@id": id,
-            "@type": "DeleteResourceOperation",
-            "title": "Delete",
-            "method": "DELETE",
-            "expects": "",
-            "returns": "",
-            "possibleStatus": possible_status
+            "@type": self.h.deleteResourceOperation,
+            self.h.title: "Delete",
+            self.h.method: "DELETE",
+            self.h.expects: "",
+            self.h.returns: "",
+            self.h.possibleStatus: possible_status
         }
         self._data.append(method)
 
@@ -152,11 +189,11 @@ class HydraMethodSerializer:
         method = {
             #"@id": id,
             "@type": type,
-            "title": title,
-            "method": httpMethod,
-            "expects": expects,
-            "returns": returns,
-            "possibleStatus": possible_status
+            self.h.title: title,
+            self.h.method: httpMethod,
+            self.h.expects: expects,
+            self.h.returns: returns,
+            self.h.possibleStatus: possible_status
         }
         self._data.append(method)
 
@@ -167,6 +204,8 @@ class HydraMethodSerializer:
 
 # remember of case using authentication
 class HydraClassSerializer():
+
+    h = HydraReservedWords()
 
     def __init__(self, request=None):
         self.request = request
@@ -190,11 +229,11 @@ class HydraClassSerializer():
 
         property_serializer = HydraPropertySerializer()
         self.createProperties(property_serializer)
-        self._data["suportedProperty"] = property_serializer.data
+        self._data[self.h.suportedProperty] = property_serializer.data
 
         method_serializer = HydraMethodSerializer()
         self.createMethods(method_serializer)
-        self._data["suportedOperation"] = method_serializer.data
+        self._data[self.h.suportedOperation] = method_serializer.data
 
     def baseStructure(self):
         class_name = self.getTitle()
@@ -205,11 +244,11 @@ class HydraClassSerializer():
         base = {
             "@context": self.getContext(),
             "@id": id,
-            "@type": "hydra:Class",
-            "title": class_name,
-            "description": self.description,
-            "suportedProperty": [],
-            "suportedOperation": []
+            "@type": self.h.Class,
+            self.h.title: class_name,
+            self.h.description: self.description,
+            self.h.suportedProperty: [],
+            self.h.suportedOperation: []
         }
         self._data = base
 
@@ -232,7 +271,7 @@ class HydraClassSerializer():
 
     def getContext(self):
         hydraVocab = {
-            "@vocab": reverse('hydra:hydravocab', request=self.request)
+            self.h.HYDRA_PREFIX: reverse('hydra:hydravocab', request=self.request)
         }
         return hydraVocab
 
@@ -240,6 +279,7 @@ class HydraClassSerializer():
 class HydraAPISerializer():
 
     _data = {}
+    h = HydraReservedWords()
 
     vocab = ""
     classes_serializers = ()
@@ -250,60 +290,19 @@ class HydraAPISerializer():
         data = {
             "@context": "",
             "@id": id,
-            "@type": "ApiDocumentation",
-            "supportedClass": ""
+            "@type": self.h.ApiDocumentation,
+            self.h.supportedClass: ""
         }
 
         self._data = data
 
     def createMetadata(self):
         self.createBase()
-        self._data["supportedClass"] = self.getClassesData()
+        self._data[self.h.supportedClass] = self.getClassesData()
         self._data["@context"] = self.getContext()
 
     def getContext(self):
-        context = {
-            #"vocab": "self.vocab",
-            "hydra": "http://www.w3.org/ns/hydra/core#",
-            "ApiDocumentation": "hydra:ApiDocumentation",
-            "property": {
-                "@id": "hydra:property",
-                "@type": "@id"
-            },
-            "readonly": "hydra:readonly",
-            "writeonly": "hydra:writeonly",
-            "supportedClass": "hydra:supportedClass",
-            "supportedProperty": "hydra:supportedProperty",
-            "supportedOperation": "hydra:supportedOperation",
-            "method": "hydra:method",
-            "expects": {
-                "@id": "hydra:expects",
-                "@type": "@id"
-            },
-            "returns": {
-                "@id": "hydra:returns",
-                "@type": "@id"
-            },
-            "statusCodes": "hydra:statusCodes",
-            "code": "hydra:statusCode",
-            "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-            "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-            "label": "rdfs:label",
-            #"description": "rdfs:comment",
-            "domain": {
-                "@id": "rdfs:domain",
-                "@type": "@id"
-            },
-            "range": {
-                "@id": "rdfs:range",
-                "@type": "@id"
-            },
-            "subClassOf": {
-                "@id": "rdfs:subClassOf",
-                "@type": "@id"
-            }
-        }
-        return context
+        return getHydraVocab()
 
     def getClassesData(self):
         classesData = []
@@ -317,7 +316,7 @@ class HydraAPISerializer():
         for oneClass in self.classes_serializers:
             temp = oneClass()
             temp = temp.data
-            if temp["title"] == class_name:
+            if temp[self.h.title] == class_name:
                 aClass = temp
                 break
         return aClass
