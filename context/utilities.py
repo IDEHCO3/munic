@@ -1,6 +1,6 @@
 from rest_framework.reverse import reverse
-from context.models import *
-from context.serializers import *
+from .models import *
+from .serializers import *
 from hydra.utilities import getHydraData
 
 def createLinkOfContext(classname, request, response, properties=None):

@@ -18,8 +18,7 @@ from django.contrib import admin
 from hydra.urls import getHydraVocabURLPatterns
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
     url(r'^munic/', include('munic_2015.urls', namespace="munic")),
-    url(r'^contexts/', include('context.urls', namespace='context')),
-    getHydraVocabURLPatterns(r'^hydra/'),
+    url(r'^munic/contexts/', include('context.urls', namespace='context')),
+    getHydraVocabURLPatterns(r'^munic/hydra/'),
 ]

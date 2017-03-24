@@ -1,6 +1,6 @@
 
 from django.conf.urls import patterns, url, include
-from hydra.views import HydraVocab
+from .views import HydraVocab
 
 urlpatterns = patterns('',
     url(r'^vocab/$', HydraVocab.as_view(), name="hydravocab"),

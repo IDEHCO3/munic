@@ -5,9 +5,9 @@ from rest_framework import generics
 from hydra.serializers import HydraSerializer
 from rest_framework import status
 
-from context.utilities import *
-from context.models import *
-from context.serializers import *
+from .utilities import *
+from .models import *
+from .serializers import *
 # Create your views here.
 
 class ContextView(APIView):

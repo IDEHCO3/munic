@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from hydra.hydra import getHydraVocab
+from .hydra import getHydraVocab
 # Create your views here.
 
 class HydraVocab(APIView):

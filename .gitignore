@@ -9,3 +9,9 @@
 
 #migrations
 */migrations/*
+
+#static
+static_root/*
+
+#nginx
+nginx/*

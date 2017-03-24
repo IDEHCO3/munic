@@ -1,6 +1,6 @@
-from hydra.hydra import *
+from .hydra import *
 from context.models import Class
-from hydra.models import *
+from .models import *
 
 class HydraSerializer(HydraClassSerializer):
 

@@ -1,6 +1,6 @@
 from context.models import *
-from hydra.models import *
-from hydra.serializers import *
+from .models import *
+from .serializers import *
 
 def getHydraData(classname, request):
     classobject = Class.objects.get(name=classname)
