@@ -5,7 +5,8 @@ from .models import *
 class HydraSerializer(HydraClassSerializer):
 
     def __init__(self, classobject, request):
-        super(HydraSerializer, self).__init__()
+#        super(HydraSerializer, self).__init__()
+        HydraClassSerializer.__init__(self)
         self.request = request
         self.classobject = classobject
 
