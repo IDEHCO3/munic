@@ -58,8 +58,8 @@ if not rows: # inserir na tabela pesquisa_munic.item_composicao_quadro_pessoal c
        #cursor.execute("SELECT nextval('pesquisa_munic.s_esfera_municipal')")
        codigo_municipio = row[2]
        geocodigo = row[0]
-       url_nome_municipio = 'http://idehco3/ibge/bcim/municipios/'+ geocodigo + '/nome'
-       url_geometry = 'http://idehco3/ibge/bcim/municipios/'+ geocodigo + '/geom'
+       url_nome_municipio = 'http://idehco4.tk/instituicoes/ibge/bcim/municipios/'+ geocodigo + '/nome'
+       url_geometry = 'http://idehco4.tk/instituicoes/ibge/bcim/municipios/'+ geocodigo + '/geom'
        sql = "insert into pesquisa_munic.esfera_municipal(id_esfera_municipal, codigo_municipio, geocodigo, url_nome_municipio, url_geometry)"
        values = "values(" + id_esfera_municipal + "," + str(codigo_municipio) + "," +  str(geocodigo) + "," + str(url_nome_municipio) + ","  + url_geometry + ")"
        sql = sql + values

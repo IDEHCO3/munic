@@ -60,8 +60,8 @@ def save_sheet_recursos_humanos(sheet_recursos_humanos):
         #Cria objeto EsferaMunicipal
         codigo_municipio = str(row[2])
         geo_codigo = str(row[0])
-        url_nome_municipio = 'http://ecoide.org/idehco3/bcedgv/ibge/bcim/municipios/'+ geo_codigo + '/nome'
-        url_geometry = 'http://ecoide.org/idehco3/bcedgv/ibge/bcim/municipios/'+ geo_codigo + '/geom'
+        url_nome_municipio = 'http://idehco4.tk/instituicoes/ibge/bcim/municipios/'+ geo_codigo + '/nome'
+        url_geometry = 'http://idehco4.tk/instituicoes/ibge/bcim/municipios/'+ geo_codigo + '/geom'
         em = EsferaMunicipal(codigo_municipio=codigo_municipio, geocodigo=geo_codigo,url_nome_municipio=url_nome_municipio, url_geometry=url_geometry)
         em.save()
         #Cria objeto ItemComposicaoQuadroPessoal
